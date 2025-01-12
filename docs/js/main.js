@@ -65,16 +65,19 @@ const wordActions = {
         redirect: "index4.html"
     },
     "e": {
-        link: "1_シナリオ.pdf"
+        link: "PDF/1_シナリオ.pdf"
     },
     "f": {
-        link: "2_ミ=ゴと人類との共存報告書.pdf"
+        link: "PDF/2_ミ=ゴと人類との共存報告書.pdf"
     },
     "g": {
-        link: "3_人間の意識と人格の研究記録.pdf"
+        link: "PDF/3_人間の意識と人格の研究記録.pdf"
     },
     "h": {
-        link: "4_SAN値についてミ=ゴの考察.pdf"
+        link: "PDF/4_SAN値についてミ=ゴの考察.pdf"
+    },
+    "i": {
+        link: "PDF/5_ミ=ゴのVR実験報告書.pdf"
     }
 };
 
@@ -92,7 +95,6 @@ const programTexts = [
     "Encrypting data..."
 ];
 
-// プログラムっぽい文字列をランダムに切り替え
 function updateProgramText() {
     const randomText = programTexts[Math.floor(Math.random() * programTexts.length)];
     programTextElement.textContent = randomText;
@@ -110,8 +112,9 @@ inputField.addEventListener('keypress', function (event) {
         const userInput = inputField.value.trim();
 
         if (wordActions[userInput]) {
-            if (wordActions[userInput].shutdown) {
-                // シャットダウン演出
+            const action = wordActions[userInput];
+
+            if (action.shutdown) {
                 document.body.style.transition = "background-color 3s ease, opacity 3s ease";
                 document.body.style.backgroundColor = "black";
                 document.body.style.opacity = "0";
@@ -127,20 +130,17 @@ inputField.addEventListener('keypress', function (event) {
                     shutdownMessage.style.left = "50%";
                     shutdownMessage.style.transform = "translate(-50%, -50%)";
 
-                    // 画面をリセットしてメッセージのみ表示
                     document.body.innerHTML = "";
                     document.body.appendChild(shutdownMessage);
                 }, 3000);
 
-                // 効果音を再生
                 const audio = new Audio('shutdown.mp3');
                 audio.play();
-            } else if (wordActions[userInput].redirect) {
-                // フェードアウトを適用してからリダイレクト
+            } else if (action.redirect) {
                 document.body.classList.add('fade-out');
 
                 setTimeout(() => {
-                    window.location.href = wordActions[userInput].redirect;
+                    window.location.href = action.redirect;
                 }, 1000);
             } else if (action.link) {
                 // PDFリンクを新しいタブで開く
@@ -149,7 +149,6 @@ inputField.addEventListener('keypress', function (event) {
                 document.body.classList.add('fade-out');
 
                 setTimeout(() => {
-                    const action = wordActions[userInput];
                     document.body.style.backgroundColor = action.color;
                     document.body.classList.remove('fade-out');
 
