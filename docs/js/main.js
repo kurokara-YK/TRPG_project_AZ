@@ -63,6 +63,18 @@ const wordActions = {
     },
     "d": {
         redirect: "index4.html"
+    },
+    "e": {
+        link: "1_シナリオ.pdf"
+    },
+    "f": {
+        link: "2_ミ=ゴと人類との共存報告書.pdf"
+    },
+    "g": {
+        link: "3_人間の意識と人格の研究記録.pdf"
+    },
+    "h": {
+        link: "4_SAN値についてミ=ゴの考察.pdf"
     }
 };
 
@@ -130,6 +142,9 @@ inputField.addEventListener('keypress', function (event) {
                 setTimeout(() => {
                     window.location.href = wordActions[userInput].redirect;
                 }, 1000);
+            } else if (action.link) {
+                // PDFリンクを新しいタブで開く
+                window.open(action.link, '_blank');
             } else {
                 document.body.classList.add('fade-out');
 
