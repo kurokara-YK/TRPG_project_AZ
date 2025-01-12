@@ -3,70 +3,137 @@ const wordActions = {
     "success": {
         color: "white",
         text: "SUCCESS",
-        textColor: "black" // テキスト色を指定
+        textColor: "black"
+    },
+    "return": {
+        shutdown: true // シャットダウン用フラグ
     },
     "現実": {
         color: "blue",
         text: "real_world",
-        textColor: "white" // テキスト色を白に
+        textColor: "white"
     },
-    "夢の中": {
+    "real": {
+        color: "blue",
+        text: "real_world",
+        textColor: "white"
+    },
+    "tutorial": {
         color: "white",
-        text: "TRPGの世界は楽しかったですか？",
-        textColor: "black" // デフォルトで黒
+        text: "Now loading",
+        textColor: "black"
+    },
+    "Cthulhu": {
+        color: "black",
+        text: "気づいてしまいましたか…あなたは1d6のSAN値チェックです",
+        textColor: "gray"
+    },
+    "クトゥルフ": {
+        color: "black",
+        text: "気づいてしまいましたか…あなたは1d6のSAN値チェックです",
+        textColor: "gray"
     },
     "クトゥルフ神話": {
         color: "black",
-        text: "もう一度生まれ直してください",
-        textColor: "gray" // テキスト色を白に
+        text: "気づいてしまいましたか…あなたは1d6のSAN値チェックです",
+        textColor: "gray"
     },
-    "シナリオ": {
+    "夢": {
         color: "white",
         text: "シナリオ",
-        textColor: "red" // テキスト色を赤に
+        textColor: "red"
+    },
+    "dream": {
+        color: "white",
+        text: "シナリオ",
+        textColor: "red"
+    },
+    "a": {
+        redirect: "index1.html"
+    },
+    "b": {
+        redirect: "index2.html"
+    },
+    "c": {
+        redirect: "index3.html"
+    },
+    "d": {
+        redirect: "index4.html"
     }
 };
 
-inputField.addEventListener('keypress', function(event) {
+inputField.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
         const userInput = inputField.value.trim();
 
         if (wordActions[userInput]) {
-            if (userInput === "シナリオ") {
-                // シナリオの場合はPDFを直接開く
-                // window.location.href = "scenario.pdf";
-                // シナリオの場合はPDFを直接ブラウザで表示
-                window.open("scenario.pdf", "_blank");
+            if (wordActions[userInput].shutdown) {
+                // シャットダウン演出
+                document.body.style.transition = "background-color 3s ease, opacity 3s ease";
+                document.body.style.backgroundColor = "black"; // 背景を黒に
+                document.body.style.opacity = "0"; // 徐々にフェードアウト
+
+                setTimeout(() => {
+                    const shutdownMessage = document.createElement('h1');
+                    shutdownMessage.textContent = "シャットダウンしています...";
+                    shutdownMessage.style.color = "white";
+                    shutdownMessage.style.fontSize = "3em";
+                    shutdownMessage.style.textAlign = "center";
+                    shutdownMessage.style.position = "absolute";
+                    shutdownMessage.style.top = "50%";
+                    shutdownMessage.style.left = "50%";
+                    shutdownMessage.style.transform = "translate(-50%, -50%)";
+
+                    // 画面をリセットしてメッセージのみ表示
+                    document.body.innerHTML = "";
+                    document.body.appendChild(shutdownMessage);
+                }, 3000); // フェードアウトが完了する3秒後
+
+                // 効果音を再生
+                const audio = new Audio('shutdown.mp3'); // shutdown.mp3を事前に用意
+                audio.play();
+            } else if (wordActions[userInput].redirect) {
+                // フェードアウトを適用してからリダイレクト
+                document.body.classList.add('fade-out');
+
+                setTimeout(() => {
+                    // フェードアウト完了後にリダイレクト
+                    window.location.href = wordActions[userInput].redirect;
+                }, 1000); // フェードアウト時間に合わせる
             } else {
                 document.body.classList.add('fade-out');
-                
-                // アニメーション終了後に背景色とテキストを更新
+
                 setTimeout(() => {
                     const action = wordActions[userInput];
-
-                    // 背景色を変更
                     document.body.style.backgroundColor = action.color;
-
-                    // フェードインを再設定するため、フェードアウトクラスを削除
                     document.body.classList.remove('fade-out');
 
-                    // 新しいテキストを表示
+                    // 元の入力ページに戻るボタンを作成
+                    const backButton = document.createElement('button');
+                    backButton.textContent = "return";
+                    backButton.style.padding = "10px 10px";
+                    backButton.style.fontSize = "1em";
+                    backButton.style.marginTop = "300px";
+                    backButton.style.cursor = "pointer";
+                    backButton.onclick = () => {
+                        // 元のページに戻る処理
+                        location.reload(); // ページをリロードして初期状態に戻す
+                    };
+
                     const newContent = document.createElement('h1');
                     newContent.textContent = action.text;
                     newContent.style.color = action.textColor;
                     newContent.style.fontSize = "3em";
                     newContent.style.textAlign = "center";
 
-                    // 現在のコンテンツをクリアして新しい要素を追加
+                    // 現在のコンテンツをクリアして、新しいテキストとボタンを表示
                     document.body.innerHTML = "";
                     document.body.appendChild(newContent);
-                }, 1000); // フェードアウトアニメーションの1秒後に実行
+                    document.body.appendChild(backButton);
+                }, 1000);
             }
         } else {
-            // 無効な入力時に振動アニメーションを実行
             inputField.classList.add('shake');
-
-            // 無効な入力の場合にエラーメッセージを一時表示
             const errorMessage = document.createElement('p');
             errorMessage.textContent = "入力が無効です。正しい単語を入力してください。";
             errorMessage.style.color = "red";
@@ -77,8 +144,7 @@ inputField.addEventListener('keypress', function(event) {
             setTimeout(() => {
                 inputField.classList.remove('shake');
                 errorMessage.remove();
-            }, 1500); // 1.5秒後にエラーメッセージを削除
+            }, 1500);
         }
     }
 });
-

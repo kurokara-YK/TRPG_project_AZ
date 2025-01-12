@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社 Me_Go - 次世代への共存技術</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background-color: #f5f5f7;
+        }
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            font-size: 1.8em;
+            margin: 0;
+            font-weight: 700;
+        }
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+        header nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 400;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        header nav a.disabled {
+            cursor: not-allowed;
+            color: gray;
+        }
+        section.hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(to bottom, #001f3f, #002952);
+            color: #fff;
+        }
+        section.hero h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            margin: 0 0 20px;
+        }
+        section.hero p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 0 0 40px;
+        }
+        section.hero button {
+            padding: 10px 30px;
+            font-size: 1.1em;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        section.about {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px;
+            gap: 40px;
+            background-color: #f5f5f7;
+        }
+        section.about img {
+            max-width: 400px;
+            width: 100%;
+            border-radius: 20px;
+        }
+        section.about div {
+            max-width: 600px;
+        }
+        section.about h2 {
+            font-size: 2em;
+            margin: 0 0 20px;
+            font-weight: 700;
+        }
+        section.about p {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 1001;
+            text-align: center;
+        }
+        #modal p {
+            margin: 10px 0;
+        }
+        #modal button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>株式会社 Me_Go</h1>
+        <nav>
+            <a href="#" onclick="showContact()">お問い合わせ</a>
+            <a href="#" onclick="showBusiness()">事業内容</a>
+            <a href="#" class="disabled">ホーム</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>次世代の人工知能技術</h2>
+        <p>私たち株式会社Me_Goは、人類のさらなる進化の為に技術を開発、提供します</p>
+        <button onclick="location.href='index.html'">詳細を見る</button>
+    </section>
+
+    <section class="about">
+        <img src="image/HP_Image.webp" alt="未来技術のイメージ">
+        <div>
+            <h2>私たちの使命</h2>
+            <p>株式会社Me_Goは、人類の進化を促進し、地球の環境を持続可能に利用するために設立されました。私たちは人類が技術に慣れ、高度な知的理解を深めるための革新的なソリューションを提供しています。</p>
+            <p>宇宙航空研究開発、人工知能制作、VR技術、VRやARを使用したゲーム開発、次世代のOS制作などを手掛けており、現在は人間の意識のような感情による判断が出来るAIを開発中です。</p>
+            <p>宇宙的な同業者の方、新規に興味のある方は「詳細を見る」から暗証番号を入力して下さい。詳細な情報やコンタクトを取りたい方はお問い合わせからご連絡下さい。</p>
+        </div>
+    </section>
+
+    <div id="modal-overlay" onclick="closeModal()"></div>
+    <div id="modal">
+        <p id="modal-content"></p>
+        <button onclick="closeModal()">閉じる</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 株式会社 Me_Go. すべての権利を保有しています。</p>
+        <p>&copy; （これはTRPGで使用の為に作成したHPです。実在する団体とは関係ありません）</p>
+    </footer>
+
+    <script>
+        function showContact() {
+            document.getElementById('modal-content').textContent = "お問い合わせ先:\n電話番号: 080-abcd-efgh\nメール: mego1970@migo.com";
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('modal-overlay').style.display = 'block';
+        }
+
+        function showBusiness() {
+            document.getElementById('modal-content').textContent = "事業内容パスワード:\n65536";
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('modal-overlay').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('modal-overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

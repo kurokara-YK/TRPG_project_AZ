@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi-Go Research Documentation</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f7;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #001f3f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+        section {
+            padding: 20px 40px;
+        }
+        section h2 {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            color: #001f3f;
+        }
+        section p {
+            margin-bottom: 20px;
+        }
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background-color: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9em;
+        }
+        .hidden {
+            display: none;
+        }
+        .language-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #password-prompt {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        #password-prompt input {
+            padding: 5px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Mi-Go Research Documentation
+    </header>
+
+    <div class="language-buttons">
+        <button onclick="showSection('section1')">1. Purpose and Background</button>
+        <button onclick="showSection('section2')">2. SAN Value Definition</button>
+        <button onclick="showSection('section3')">3. Personality Simulation</button>
+        <button onclick="showSection('section4')">4. Coexistence Scenarios</button>
+        <button onclick="showPasswordPrompt()">Restricted Access</button>
+    </div>
+
+    <section id="section1" class="hidden">
+        <h2>1. Purpose and Background</h2>
+        <p>
+            Mi-Go's primary research focuses on creating a complete model of human consciousness, as instructed by Nyarlathotep. 
+            This model aims to grant Azathoth a personality, allowing Nyarlathotep to control Azathoth's immense power and reshape universal laws.
+        </p>
+    </section>
+
+    <section id="section2" class="hidden">
+        <h2>2. SAN Value Definition</h2>
+        <p>
+            Mi-Go defines human fear (SAN value) as an advanced survival mechanism. Fear functions as an early warning system, enhancing individual and collective survival rates. 
+            It also forms the foundation for personality, enabling both rational and emotional decision-making.
+        </p>
+    </section>
+
+    <section id="section3" class="hidden">
+        <h2>3. Personality Simulation</h2>
+        <p>
+            The "TRPG_Project_AZ" aims to simulate human personality through a series of experimental stages. 
+            These include encoding human brains into virtual space, aggregating data from multiple brains, and refining personality development through simulated environments.
+        </p>
+    </section>
+
+    <section id="section4" class="hidden">
+        <h2>4. Coexistence Scenarios</h2>
+        <p>
+            Mi-Go envisions two potential pathways for coexistence between humans and their species. 
+            Either humans lose their SAN values, becoming rational entities like Mi-Go, or Mi-Go acquires human-like personalities, enabling mutual understanding and collaboration.
+        </p>
+    </section>
+
+    <div id="password-prompt">
+        <p>Enter the password to access restricted content:</p>
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
+    <footer>
+        &copy; 2025 Mi-Go Research Initiative. All rights reserved.
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('section.hidden');
+            sections.forEach(section => section.style.display = 'none');
+
+            // Show the selected section
+            const sectionToShow = document.getElementById(sectionId);
+            if (sectionToShow) {
+                sectionToShow.style.display = 'block';
+            }
+        }
+
+        function showPasswordPrompt() {
+            document.getElementById('password-prompt').style.display = 'block';
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === '英語もよめないの？草') {
+                // Redirect to index3.html if password is correct
+                window.location.href = 'index3.html';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>

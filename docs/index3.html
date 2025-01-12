@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ミ=ゴ研究資料</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f7;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #001f3f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+        section {
+            padding: 20px 40px;
+        }
+        section h2 {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            color: #001f3f;
+        }
+        section p {
+            margin-bottom: 20px;
+        }
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background-color: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9em;
+        }
+        .hidden {
+            display: none;
+        }
+        .language-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #password-prompt {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        #password-prompt input {
+            padding: 5px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        ミ=ゴ研究資料
+    </header>
+
+    <div class="language-buttons">
+        <button onclick="showSection('section1')">1. 目的と背景</button>
+        <button onclick="showSection('section2')">2. SAN値の定義</button>
+        <button onclick="showSection('section3')">3. 人格シミュレーション</button>
+        <button onclick="showSection('section4')">4. 共存のシナリオ</button>
+        <button onclick="showPasswordPrompt()">制限付きアクセス</button>
+    </div>
+
+    <section id="section1" class="hidden">
+        <h2>1. 目的と背景</h2>
+        <p>
+            ミ=ゴの主な研究は、ニャルラトホテプの命令に従い、人間の意識を完全に再現するモデルを作成することに焦点を当てています。
+            このモデルはアザトースに人格を与えることを目的としており、それによりニャルラトホテプはアザトースの巨大な力を支配し、宇宙の法則を再構築することを目指しています。
+        </p>
+    </section>
+
+    <section id="section2" class="hidden">
+        <h2>2. SAN値の定義</h2>
+        <p>
+            ミ=ゴは、人間の恐怖（SAN値）を高度な生存メカニズムとして定義しています。恐怖は早期警告システムとして機能し、
+            個人および集団の生存率を向上させます。また、恐怖は人格の基盤を形成し、合理的かつ感情的な意思決定を可能にします。
+        </p>
+    </section>
+
+    <section id="section3" class="hidden">
+        <h2>3. 人格シミュレーション</h2>
+        <p>
+            「TRPG_Project_AZ」は、一連の実験段階を通じて人間の人格をシミュレートすることを目的としています。
+            これには、人間の脳を仮想空間にエンコードする方法や、複数の脳データを統合する方法、
+            またシミュレートされた環境で人格を発展させる方法が含まれます。
+        </p>
+    </section>
+
+    <section id="section4" class="hidden">
+        <h2>4. 共存のシナリオ</h2>
+        <p>
+            ミ=ゴは、人間と自らの種族が共存するための2つの可能な道筋を考えています。
+            一つは、人間がSAN値を失い、ミ=ゴと同じ合理的な存在になること。
+            もう一つは、ミ=ゴが人間のような人格を獲得し、相互理解と協力が可能になることです。
+        </p>
+    </section>
+
+    <div id="password-prompt">
+        <p>制限付きコンテンツにアクセスするためのパスワードを入力してください。</p>
+        <input type="password" id="password" placeholder="パスワードを入力">
+        <button onclick="checkPassword()">送信</button>
+    </div>
+
+    <footer>
+        &copy; 2025 ミ=ゴ研究プロジェクト. すべての権利を保有しています。
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // 全セクションを非表示
+            const sections = document.querySelectorAll('section.hidden');
+            sections.forEach(section => section.style.display = 'none');
+
+            // 選択されたセクションを表示
+            const sectionToShow = document.getElementById(sectionId);
+            if (sectionToShow) {
+                sectionToShow.style.display = 'block';
+            }
+        }
+
+        function showPasswordPrompt() {
+            document.getElementById('password-prompt').style.display = 'block';
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === 'w') {
+                // パスワードが正しい場合、index3.html にリダイレクト
+                window.location.href = 'index2.html';
+            } else {
+                alert('パスワードが間違っています。再度入力してください。');
+            }
+        }
+    </script>
+</body>
+</html>
