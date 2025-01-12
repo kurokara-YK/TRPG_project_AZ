@@ -3,25 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index1 Page</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #dea816;
-        }
-
-        h1 {
-            color: #333;
-            font-size: 3em;
-        }
-    </style>
+    <title>株式会社Me_Go - 人類とミ=ゴの共存</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
 </head>
 <body>
-    <h1>Welcome to Index1 Page!</h1>
+    <header>
+        <h1>株式会社Me_Go</h1>
+        <nav>
+            <a href="index1.html">ホーム</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2 onclick="toggleContent(this)">我々の存在に気づいている皆様へ</h2>
+        <div class="content">
+            <p>ミ=ゴと地球との共存を目指して</p>
+            <p>株式会社Me_Goは、人類と我々ミ=ゴが共に歩む未来を築くために設立された企業です。私たちは、地球という美しい惑星の環境を保全し、持続可能な資源利用を目指しながら、人類との共存を実現するための道を模索しています。</p>
+        </div>
+    </section>
+
+    <section>
+        <h2 onclick="toggleContent(this)">技術力を持ちながらなぜ地球を支配しないのか？</h2>
+        <div class="content">
+            <p>私たちミ=ゴは、地球を単に支配の対象としてではなく、調査・観察・探索の対象としています。地球上の生態系や人類が持つ独自の文化・技術には、私たちが学ぶべき多くの要素があります。しかし、地球を支配しようとすれば、旧支配者や旧神といった上位存在の妨害を受けることは避けられません。</p>
+            <p>だからこそ、私たちは支配ではなく、共存という道を選びました。</p>
+        </div>
+    </section>
+
+    <section>
+        <h2 onclick="toggleContent(this)">共存への挑戦</h2>
+        <div class="content">
+            <p>現状では、人類の皆様が私たちミ=ゴに対して本能的な恐怖反応（いわゆるSAN値の削れ）を示すため、相互理解が困難です。そのため、以下のプロジェクトを通じて共存への道筋を描いています。</p>
+            <ul>
+                <li>1920年代からクトゥルフ神話に基づく知識や技術を断片的に提供。</li>
+                <li>TRPGを普及させ、人類の人格モデルを収集・分析。</li>
+                <li>VR技術を用いたTRPGゲームで人格データを解析。</li>
+                <li>ゲーム開発やPC、OS制作で人類の進化を支援。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2 onclick="toggleContent(this)">共に未来を築きましょう</h2>
+        <div class="content">
+            <p>我々ミ=ゴは、「人格」を持ち合わせていません。人間と同様に「人格」を獲得し、共に歩む未来を目指しています。そのために、人類の皆様と協力し、新たな可能性を追求したいと考えています。技術、知識、そして文化を共有することで、地球という舞台で「共存」の物語を紡いでいきましょう。</p>
+            <p>恐怖を超えた先にある、新たな世界を一緒に作りましょう。株式会社Me_Goは、あなたと共にその一歩を踏み出します。</p>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 株式会社Me_Go. すべての権利を保有しています。（これはTRPGで使用の為に作成したHPです。実在する団体とは関係ありません）
+    </footer>
+
+    <script>
+        function toggleContent(element) {
+            const content = element.nextElementSibling;
+            const isVisible = content.style.display === 'block';
+            document.querySelectorAll('.content').forEach(c => c.style.display = 'none'); // 他の内容を閉じる
+            if (!isVisible) {
+                content.style.display = 'block'; // 現在の内容を表示
+            }
+        }
+    </script>
 </body>
 </html>

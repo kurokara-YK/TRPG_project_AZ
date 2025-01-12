@@ -1,11 +1,15 @@
 const inputField = document.getElementById('input-field');
+const programTextElement = document.createElement('div');
+programTextElement.id = 'program-text';
+document.body.appendChild(programTextElement);
+
 const wordActions = {
     "success": {
         color: "white",
         text: "SUCCESS",
         textColor: "black"
     },
-    "return": {
+    "shutdown": {
         shutdown: true // シャットダウン用フラグ
     },
     "現実": {
@@ -62,6 +66,33 @@ const wordActions = {
     }
 };
 
+// プログラムっぽい文字列を表示
+const programTexts = [
+    "Initializing system...",
+    "Connecting to server...",
+    "Access granted.",
+    "Running diagnostics...",
+    "Compiling code...",
+    "Decrypting...",
+    "Injection successful.",
+    "Code execution in progress...",
+    "Data transmission: OK.",
+    "Encrypting data..."
+];
+
+// プログラムっぽい文字列をランダムに切り替え
+function updateProgramText() {
+    const randomText = programTexts[Math.floor(Math.random() * programTexts.length)];
+    programTextElement.textContent = randomText;
+}
+
+// 3秒ごとに更新
+setInterval(updateProgramText, 3000);
+
+// 初期テキストを設定
+updateProgramText();
+
+// 入力フィールドの処理
 inputField.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
         const userInput = inputField.value.trim();
@@ -70,8 +101,8 @@ inputField.addEventListener('keypress', function (event) {
             if (wordActions[userInput].shutdown) {
                 // シャットダウン演出
                 document.body.style.transition = "background-color 3s ease, opacity 3s ease";
-                document.body.style.backgroundColor = "black"; // 背景を黒に
-                document.body.style.opacity = "0"; // 徐々にフェードアウト
+                document.body.style.backgroundColor = "black";
+                document.body.style.opacity = "0";
 
                 setTimeout(() => {
                     const shutdownMessage = document.createElement('h1');
@@ -87,19 +118,18 @@ inputField.addEventListener('keypress', function (event) {
                     // 画面をリセットしてメッセージのみ表示
                     document.body.innerHTML = "";
                     document.body.appendChild(shutdownMessage);
-                }, 3000); // フェードアウトが完了する3秒後
+                }, 3000);
 
                 // 効果音を再生
-                const audio = new Audio('shutdown.mp3'); // shutdown.mp3を事前に用意
+                const audio = new Audio('shutdown.mp3');
                 audio.play();
             } else if (wordActions[userInput].redirect) {
                 // フェードアウトを適用してからリダイレクト
                 document.body.classList.add('fade-out');
 
                 setTimeout(() => {
-                    // フェードアウト完了後にリダイレクト
                     window.location.href = wordActions[userInput].redirect;
-                }, 1000); // フェードアウト時間に合わせる
+                }, 1000);
             } else {
                 document.body.classList.add('fade-out');
 
@@ -108,7 +138,6 @@ inputField.addEventListener('keypress', function (event) {
                     document.body.style.backgroundColor = action.color;
                     document.body.classList.remove('fade-out');
 
-                    // 元の入力ページに戻るボタンを作成
                     const backButton = document.createElement('button');
                     backButton.textContent = "return";
                     backButton.style.padding = "10px 10px";
@@ -116,8 +145,7 @@ inputField.addEventListener('keypress', function (event) {
                     backButton.style.marginTop = "300px";
                     backButton.style.cursor = "pointer";
                     backButton.onclick = () => {
-                        // 元のページに戻る処理
-                        location.reload(); // ページをリロードして初期状態に戻す
+                        location.reload();
                     };
 
                     const newContent = document.createElement('h1');
@@ -126,7 +154,6 @@ inputField.addEventListener('keypress', function (event) {
                     newContent.style.fontSize = "3em";
                     newContent.style.textAlign = "center";
 
-                    // 現在のコンテンツをクリアして、新しいテキストとボタンを表示
                     document.body.innerHTML = "";
                     document.body.appendChild(newContent);
                     document.body.appendChild(backButton);
